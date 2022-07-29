@@ -1,0 +1,68 @@
+---
+title: "onto2022 for Bioc 2022"
+author: "Vincent J. Carey, stvjc at channing.harvard.edu"
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+vignette: >
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteIndexEntry{onto2022 for Bioc 2022}
+  %\VignetteEncoding{UTF-8}
+output:
+  BiocStyle::html_document:
+    highlight: pygments
+    number_sections: yes
+    theme: united
+    toc: yes
+---
+
+# Introduction: ontologies for information science
+
+- Systematic controlled and versioned vocabularies with fixed-length tags
+- Relationships among terms and term referents are formally defined
+- Languages or markups for defining and computing with ontologies:
+    - RDF/OWL
+    - OBO (stanzas)
+- Tools for manipulating and using ontologies
+    - R ecosystem: ontologyIndex, rols, glitter (RDF querying)
+    - Protege
+    - ROBOT, pronto
+
+# Two applications
+
+- Precise characterization of phenotypes in GWAS
+- Cell type identification with scRNAseq
+
+## gwascat
+
+EBI produces a catalog of GWAS results, retaining those
+that are significant and validated.
+
+```{r doont}
+suppressPackageStartupMessages({
+library(onto2022)
+})
+if (!exists("newcat")) data(newcat)
+newcat
+mcols(newcat[1,])$MAPPED_TRAIT_URI
+```
+
+EFO is experimental factor ontology.
+We have a copy (likely somewhat out-of-date)
+in the ontoProc package.
+
+```{r lkefo}
+efo = getEFOOnto()
+efo$name["EFO:0007789"]
+```
+
+## ieugwasr
+
+The Bristol Integrative Epidemiology Unit curates
+a large collection of summary statistics for many GWAS.
+
+```{r lkieu, cache=TRUE}
+library(ieugwasr)
+gi = gwasinfo()
+gi
+tail(sort(table(gi$ontology)))
+```
+

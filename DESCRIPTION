@@ -1,0 +1,23 @@
+Package: onto2022
+Title: Bioc2022 presentation on ontoProc
+Version: 0.0.1
+Authors@R: 
+    c(person(
+        "Vincent", "Carey", role = c("aut", "cre"),
+        email = "stvjc@channing.harvard.edu"
+     )
+    )
+Description: Bioc2022 presentation on ontoProc
+License: Artistic-2.0
+Encoding: UTF-8
+Depends: R (>= 3.6), dplyr, ontoProc, pkgdown, gwascat, GenomicRanges,
+	ieugwasr
+Imports:
+    methods,
+    tibble,
+    BiocManager
+Suggests: knitr, testthat
+VignetteBuilder: knitr
+biocViews: Infrastructure
+RoxygenNote: 7.1.1
+Remotes: mrcieu/ieugwasr
