@@ -14,6 +14,8 @@ output:
     toc: yes
 ---
 
+Thanks to Sara Stankiewicz of Channing Division of Network Medicine for technical assistance in the maintenance of ontoProc
+
 # Introduction: ontologies for information science
 
 - Systematic controlled and versioned vocabularies with fixed-length tags
@@ -84,6 +86,8 @@ We can explore Cell Ontology interactively using Web Protege:
 Of note are the additional annotations, relating the cell type to
 plasma membrane proteins.
 
+### Ontological DAG for cell types
+
 Visualizing the derivation of some types of interest:
 ```{r lkco,cache=TRUE}
 cl = getCellOnto()
@@ -95,3 +99,27 @@ onto_plot2(cl, cl3k)
 
 Use `ctmarks(cl)` for interactive visualization of a subset of cell types of interest:
 those for which plasma membrane protein relationships have been encoded.
+
+### Latest Common Ancestor
+
+
+```{r mkgr}
+parents <- cl$parents
+self <- rep(names(parents), lengths(parents))
+
+suppressPackageStartupMessages({
+library(igraph)
+})
+g <- make_graph(rbind(unlist(parents), self))
+g
+```
+A very general approach to finding "common ancestors"
+can be used to "roll up" fine-grained assignments,
+allowing combination of differentially annotated collections.
+
+```{r getlca}
+lca = findCommonAncestors(A="CL:0000860", B="CL:0001022", g=g)
+lca
+cl$name[rownames(lca)]
+```
+
