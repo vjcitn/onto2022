@@ -31,7 +31,12 @@ output:
 - Precise characterization of phenotypes in GWAS
 - Cell type identification with scRNAseq
 
-## gwascat
+## GWAS
+
+We'll look at two GWAS resources that use ontologies in the characterization
+of traits.
+
+### gwascat
 
 EBI produces a catalog of GWAS results, retaining those
 that are significant and validated.
@@ -54,7 +59,7 @@ efo = getEFOOnto()
 efo$name["EFO:0007789"]
 ```
 
-## ieugwasr
+### ieugwasr
 
 The Bristol Integrative Epidemiology Unit curates
 a large collection of summary statistics for many GWAS.
@@ -66,3 +71,27 @@ gi
 tail(sort(table(gi$ontology)))
 ```
 
+## Cell ontology
+
+The SingleR book of Aaron Lun provides basic motivation and examples.
+
+![Motivation](singleR_1.jpg)
+
+We can explore Cell Ontology interactively using Web Protege:
+
+![Protege view](webprot.jpg)
+
+Of note are the additional annotations, relating the cell type to
+plasma membrane proteins.
+
+Visualizing the derivation of some types of interest:
+```{r lkco,cache=TRUE}
+cl = getCellOnto()
+head(cl$name)
+cl3k = c("CL:0000492", "CL:0001054", "CL:0000236", "CL:0000625",
+"CL:0000576", "CL:0000623", "CL:0000451", "CL:0000556")
+onto_plot2(cl, cl3k)
+```
+
+Use `ctmarks(cl)` for interactive visualization of a subset of cell types of interest:
+those for which plasma membrane protein relationships have been encoded.

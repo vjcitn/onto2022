@@ -1,0 +1,10 @@
+pandoc: '2.5'
+pkgdown: 2.0.6
+pkgdown_sha: ~
+articles:
+  onto2022: onto2022.html
+last_built: 2022-07-29T14:35Z
+urls:
+  reference: https://github.com/vjcitn/onto2022/reference
+  article: https://github.com/vjcitn/onto2022/articles
+
